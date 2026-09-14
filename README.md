@@ -2,7 +2,7 @@
 This little python app will enable your Synology to send notifications to your desired Nextcloud talk room. You don´t need a nextcloud bot or another addon or plugin. Also, we will make use of webhook targets in stock Synology DSM. What I want to say is, all you need is a Synology, a nextcloud talk and an debian/ubuntu lxc/vm and you my friend are ready to rock!
 
 ## Requirements
-* Proxmox PVE or PBS
+* Synology DSM
 * Nextcloud with Nextcloud Talk
 * Debian or Ubuntu LXC/VM
 
@@ -34,13 +34,11 @@ sudo mkdir /opt/synology-talk-bridge
 ```shell
 sudo nano /opt/synology-talk-bridge/app.py
 ```
-(Optional: The notification proxmox sends can be quiet long. This is why I let the python script cut the message after 600 characters. If you want more or less, you can change the number in line 181.)
-
 5. Let´s create the webhook secret:
 ```shell
 openssl rand -hex 16
 ```
-6. Copy the secret and let´s create our environments file. Fill it out, too!
+6. Copy the secret and let´s create our environments file. Fill it out, too! Don´t change the port if you don´t know what you are doing!
 ```shell
 sudo nano /etc/synology-talk-bridge.env
 ```
@@ -73,14 +71,15 @@ curl -i http://127.0.0.1:8789/health
 12. With this. We can move to one of our synology servers!
 
 ### Synology setup
-1. Log into your Synology and click on Datacenter.
-2. Scroll down and click on Notifications
-3. Under "Notification Targets" click on "Add" and select "Webhook"
+1. Log into your Synology and click on "Control Panel" and select "Notifications".
+![Synologywebhooksetup1](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology.jpg)
+3. 
+4. Under "Notification Targets" click on "Add" and select "Webhook"
 ![proxmoxwebhooksetup1](https://github.com/wolkenlosIT/proxmox-nextcloudTALK-bridge/blob/main/setupimages/proxmoxwebhooksetup1.jpg)
-4. Add a Endpoint name. Whatever you like
-5. Under "Method/URL" select "POST" and add your lxc/vm url in the following format: http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8788/proxmox
-6. Under Headers add a Header with the key: "X-Proxmox-Webhook-Secret" and the value, which is the webhook secret you created in the last part.
-7. Copy and paste the following into "Body":
+5. Add a Endpoint name. Whatever you like
+6. Under "Method/URL" select "POST" and add your lxc/vm url in the following format: http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8788/proxmox
+7. Under Headers add a Header with the key: "X-Proxmox-Webhook-Secret" and the value, which is the webhook secret you created in the last part.
+8. Copy and paste the following into "Body":
 ```shell
 {
 "title":"{{ escape title }}",
