@@ -80,8 +80,8 @@ curl -i http://127.0.0.1:8789/health
 http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8789/synology?text=%40%40TEXT%40%40
 ```
 ![Synologywebhooksetup3](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology3.jpg)
-7. Under "HTTP Method" select "POST". Add a Header under HTTP Header with the "parameter": X-Synology-Webhook-Secret and the value which is your webhook secret that you created before.
-9. Add the following "HTTP Body" and press save:
+4. Under "HTTP Method" select "POST". Add a Header under HTTP Header with the "parameter": X-Synology-Webhook-Secret and the value which is your webhook secret that you created before.
+5. Add the following "HTTP Body" and press save:
 ```shell
 {
   "title": "@@TITLE@@",
@@ -89,14 +89,15 @@ http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8789/synology?text=%40%40TEXT%40%40
 }
 ```
 ![Synologywebhooksetup4](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology4.jpg)
-9. Select your Target and click on Test. If everything is working you should have received a message in your Nextcloud Talk room
+6. Select your Target and click on Test. If everything is working you should have received a message in your Nextcloud Talk room
+7. If you have multiple Synologys, you just simply have to repeat the Synology Setup on each of them. There is no change on the lxs/vm or nextcloud. The nextcloud message will always say which server is sending the message
 
 
 ### Monitor the bridge with Uptime Kuma
 1. Log into your Uptime Kuma
 2. Add a new monitor
 3. For "Monitortyp" select "HTTP(s)"
-4. For the "URL" http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8788/health
+4. For the "URL" http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8789/health
 5. Safe
 
 ##
