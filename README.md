@@ -73,27 +73,24 @@ curl -i http://127.0.0.1:8789/health
 ### Synology setup
 1. Log into your Synology and click on "Control Panel" and select "Notifications".
 ![Synologywebhooksetup1](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology.jpg)
-3. 
-4. Under "Notification Targets" click on "Add" and select "Webhook"
-![proxmoxwebhooksetup1](https://github.com/wolkenlosIT/proxmox-nextcloudTALK-bridge/blob/main/setupimages/proxmoxwebhooksetup1.jpg)
-5. Add a Endpoint name. Whatever you like
-6. Under "Method/URL" select "POST" and add your lxc/vm url in the following format: http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8788/proxmox
-7. Under Headers add a Header with the key: "X-Proxmox-Webhook-Secret" and the value, which is the webhook secret you created in the last part.
-8. Copy and paste the following into "Body":
+2. Then click on "Webhook" and "Add". Set "Custom" for "Provider" and "All" for "Rules. Then press "Next":
+![Synologywebhooksetup2](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology2.jpg)
+3. For "Provider Name" enter whatever you want. Leave the Subject as is. For "Webhook URL" enter the following:
+```shell
+http://SWAP_WITH_YOUR_LXC_IP_ADRESS:8789/synology?text=%40%40TEXT%40%40
+```
+![Synologywebhooksetup3](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology3.jpg)
+7. Under "HTTP Method" select "POST". Add a Header under HTTP Header with the "parameter": X-Synology-Webhook-Secret and the value which is your webhook secret that you created before.
+9. Add the following "HTTP Body" and press save:
 ```shell
 {
-"title":"{{ escape title }}",
-"message":"{{ escape message }}",
-"severity":"{{ escape severity }}",
-"timestamp":{{ timestamp }},
-"fields":{{ json fields }}
+  "title": "@@TITLE@@",
+  "message": "@@TEXT@@"
 }
 ```
-8. Safe
-![proxmoxwebhooksetup2](https://github.com/wolkenlosIT/proxmox-nextcloudTALK-bridge/blob/main/setupimages/proxmoxwebhooksetup2.jpg)
-9. Select your Target and click on Test. If everything is working you should have received in your Nextcloud Talk room
-10. Under Notification Matcher you can add your newly created webhook target, so that you get all or whatever notifications you desire to your Nextcloud.
-![proxmoxwebhooksetup3](https://github.com/wolkenlosIT/proxmox-nextcloudTALK-bridge/blob/main/setupimages/proxmoxwebhooksetup3.jpg)
+![Synologywebhooksetup4](https://github.com/wolkenlosIT/synology-nextcloudTALK-bridge/blob/main/setupimages/synology4.jpg)
+9. Select your Target and click on Test. If everything is working you should have received a message in your Nextcloud Talk room
+
 
 ### Monitor the bridge with Uptime Kuma
 1. Log into your Uptime Kuma
@@ -103,8 +100,8 @@ curl -i http://127.0.0.1:8789/health
 5. Safe
 
 ##
-I hope you like this! This is my first repo, so will to give me advice!
-You can ask my questions in german too!
+I hope you like this! This is my second repo, so please give me advice!
+You can ask me questions in German too!
 
 
 
