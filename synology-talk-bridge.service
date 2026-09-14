@@ -1,0 +1,19 @@
+[Unit]
+Description=Synology to Nextcloud Talk Bridge
+After=network.target
+
+[Service]
+User=synology-talk
+Group=synology-talk
+
+WorkingDirectory=/opt/synology-talk-bridge
+
+EnvironmentFile=/etc/synology-talk-bridge.env
+
+ExecStart=/usr/bin/python3 /opt/synology-talk-bridge/app.py
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
