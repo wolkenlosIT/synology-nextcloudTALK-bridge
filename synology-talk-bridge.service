@@ -12,8 +12,10 @@ EnvironmentFile=/etc/synology-talk-bridge.env
 
 ExecStart=/usr/bin/python3 /opt/synology-talk-bridge/app.py
 
-Restart=on-failure
+Restart=always
 RestartSec=5
+
+NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
