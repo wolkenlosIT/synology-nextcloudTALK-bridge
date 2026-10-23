@@ -11,7 +11,7 @@ from urllib.parse import urlparse, parse_qs
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-# Variables. Don´t change anything here. Place it in proxmox-talk-bridge.env
+# Variables. Don´t change anything here. Place it in synology-talk-bridge.env
 LISTEN_HOST = os.environ["LISTEN_HOST"]
 LISTEN_PORT = int(os.environ["LISTEN_PORT"])
 SYNOLOGY_HOSTS = {
